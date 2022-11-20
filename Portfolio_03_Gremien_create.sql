@@ -24,21 +24,24 @@ create table Gremien (
     offiziell BOOLEAN,
     inoffiziell BOOLEAN,
     Start date,
-    Ende date
+    Ende date,
+    constraint fk_Gremien_hat foreign key (ID) references hat (ID),
+    constraint fk_Gremien_Mitglieder foreign key (ID) references Mitglieder (ID)
 );
 
 create table Mitglieder (
     ID integer primary key,
     Funktion varchar (200),
-    constraint fk_Mitglieder_Gremien foreign key (ID) references Gremien (ID)
+    constraint fk_Mitglieder_Gremien foreign key (ID) references Gremien (ID),
+    constraint fk_Mitglieder_Personen foreign key (ID) references Personen (ID)
 );
 
 create table Personen (
     ID integer primary key,
     Geburtsdatum date,
     Geschlecht char (1),
-    constraint fk_Personen_Mitgliederen foreign key (ID) references Mitglieder (ID),
-    constraint fk_Personen_Adresseen foreign key (ID) references Adresse (ID),
+    constraint fk_Personen_Mitglieder foreign key (ID) references Mitglieder (ID),
+    constraint fk_Personen_Adressen foreign key (ID) references Adresse (ID),
     constraint fk_Personen_Namen foreign key (ID) references Namen (ID)
 );
 
@@ -116,7 +119,6 @@ create table Dokument (
 create table nimmt_teil (
     ID integer primary key,
     constraint fk_nt_Person foreign key (ID) references Personen (ID),
-    constraint fk_nt_Mitglied foreign key (ID) references Mitglieder (ID),
     constraint fk_nt_Sitzung foreign key (ID) references Sitzungen (ID)
 );
 
