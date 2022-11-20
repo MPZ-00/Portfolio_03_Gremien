@@ -29,19 +29,24 @@ create table Gremien (
 
 create table Mitglieder (
     ID integer primary key,
-    Funktion varchar (200)
+    Funktion varchar (200),
+    constraint fk_Mitglieder_Gremien foreign key (ID) references Gremien (ID)
 );
 
 create table Personen (
     ID integer primary key,
     Geburtsdatum date,
-    Geschlecht char (1)
+    Geschlecht char (1),
+    constraint fk_Personen_Mitgliederen foreign key (ID) references Mitglieder (ID),
+    constraint fk_Personen_Adresseen foreign key (ID) references Adresse (ID),
+    constraint fk_Personen_Namen foreign key (ID) references Namen (ID)
 );
 
 create table Namen (
     ID integer primary key,
     Vorname varchar (100),
-    Nachname varchar (300)
+    Nachname varchar (300),
+    constraint fk_Namen_Personen foreign key (ID) references Personen (ID)
 );
 
 create table Adresse (
@@ -49,7 +54,8 @@ create table Adresse (
     Strasse varchar (200),
     Hausnummer integer,
     PLZ integer,
-    Ort varchar (100)
+    Ort varchar (100),
+    constraint fk_Adresse_Personen foreign key (ID) references Personen (ID)
 );
 
 create table Sitzungen (
@@ -60,14 +66,15 @@ create table Sitzungen (
     oeffentlich boolean,
     Ort varchar (100),
     Protokoll varchar (5000),
-    Tagesordnung embeddedlist Tagesordnung
+    constraint fk_Sitzungen_hat foreign key (ID) references Gremien (ID)
 );
 
 create table Tagesordnung (
     ID integer primary key,
     Titel varchar (100),
     Kurzbeschreibung varchar (500),
-    Protokolltext varchar (5000)
+    Protokolltext varchar (5000),
+    constraint fk_Tagesordnung_top foreign key (ID) references top (ID)
 );
 
 create table Lehrbeauftrage (
@@ -104,4 +111,36 @@ create table Dokument (
     Mime_Typ varchar (50),
     Erstelldatum date,
     Inhalt varchar (5000)
+);
+
+create table nimmt_teil (
+    ID integer primary key,
+    constraint fk_nt_Person foreign key (ID) references Personen (ID),
+    constraint fk_nt_Mitglied foreign key (ID) references Mitglieder (ID),
+    constraint fk_nt_Sitzung foreign key (ID) references Sitzungen (ID)
+);
+
+create table fuehrt_Protokoll_bei (
+    ID integer primary key,
+    constraint fk_fPb_Person foreign key (ID) references Personen (ID),
+    constraint fk_fPb_Person foreign key (ID) references Sitzungen (ID)
+);
+
+create table top (
+    ID integer primary key,
+    constraint fk_top_Sitzungen foreign key (ID) references Sitzungen (ID),
+    constraint fk_top_Tagesordnung foreign key (ID) references Tagesordnung (ID)
+);
+
+create table hat (
+    ID integer primary key,
+    constraint fk_hat_Gremien foreign key (ID) references Gremien (ID),
+    constraint fk_hat_Sitzungen foreign key (ID) references Sitzungen (ID)
+);
+
+create table erstellt_von (
+    ID integer primary key,
+    ID_Dokument integer,
+    constraint fk_ert_Personen foreign key (ID) references Personen (ID),
+    constraint fk_ert_Dokument foreign key (ID_Dokument) references Dokument (ID)
 );
