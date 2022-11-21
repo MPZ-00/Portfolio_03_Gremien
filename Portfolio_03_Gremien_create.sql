@@ -71,14 +71,14 @@ create table Sitzungen (
     Einladung_am date,
     oeffentlich boolean default false,
     Ort varchar (100),
-    Protokoll varchar (5000)
+    Protokoll varchar (4000)
 );
 
 create table Tagesordnung (
     ID integer primary key,
     Titel varchar (100),
     Kurzbeschreibung varchar (500),
-    Protokolltext varchar (5000),
+    Protokolltext varchar (4000),
     constraint fk_Tagesordnung_top foreign key (ID) references top (ID)
 );
 
@@ -114,7 +114,7 @@ create table Dokument (
     ID integer primary key,
     Mime_Typ varchar (50),
     Erstelldatum date,
-    Inhalt varchar (5000)
+    Inhalt varchar (4000)
 );
 
 create table nimmt_teil (
