@@ -1,6 +1,6 @@
-insert into Gremien (ID, Name, offiziell, inoffiziell, Start, Ende) values (1, 'Hochschulrat', true, false, to_date('', ''), to_date('', ''));
-insert into Gremien (ID, Name, offiziell, inoffiziell, Start, Ende) values (2, 'Fachschaft E', true, false, to_date('', ''), to_date('', ''));
-insert into Gremien (ID, Name, offiziell, inoffiziell, Start, Ende) values (3, 'Studienrat', true, false, to_date('', ''), to_date('', ''));
+insert into Gremien (ID, Name, offiziell, inoffiziell, Beginn, Ende) values (1, 'Hochschulrat', true, false, to_date('', ''), to_date('', ''));
+insert into Gremien (ID, Name, offiziell, inoffiziell, Beginn, Ende) values (2, 'Fachschaft E', true, false, to_date('', ''), to_date('', ''));
+insert into Gremien (ID, Name, offiziell, inoffiziell, Beginn, Ende) values (3, 'Studienrat', true, false, to_date('', ''), to_date('', ''));
 
 insert into Aufgabengebiete (ID, Ag_ID, Aufgabengebiet) values (1, 1, 'Studenten');
 insert into Aufgabengebiete (ID, Ag_ID, Aufgabengebiet) values (2, 1, 'Verwaltung');
@@ -43,9 +43,9 @@ insert into Tagesordnung (ID, Titel, Kurzbeschreibung, Protokolltext) values (2,
 insert into Tagesordnung (ID, Titel, Kurzbeschreibung, Protokolltext) values (3, 'Sonstiges', '', null);
 insert into Tagesordnung (ID, Titel, Kurzbeschreibung, Protokolltext) values (4, 'Ersti Hütte', 'Ankündigung', null);
 
-insert into Sitzungen (ID, Beginn, Ende, Einladung_am, oeffentlich, Ort, Protokoll) values (1, to_date('06.12.2022 14:00:00', 'dd.mm.YYYY hh:mm:ss'), to_date('06.12.2022 16:00:00', 'dd.mm.YYYY hh:mm:ss'), false, 'Gebäude H', null);
-insert into Sitzungen (ID, Beginn, Ende, Einladung_am, oeffentlich, Ort, Protokoll) values (2, to_date('23.11.2022 20:00:00', 'dd.mm.YYYY hh:mm:ss'), to_date('23.11.2022 21:30:00', 'dd.mm.YYYY hh:mm:ss'), true, 'Gebäude B', null);
-insert into Sitzungen (ID, Beginn, Ende, Einladung_am, oeffentlich, Ort, Protokoll) values (3, to_date('04.12.2022 14:00:00', 'dd.mm.YYYY hh:mm:ss'), to_date('04.12.2022 16:00:00', 'dd.mm.YYYY hh:mm:ss'), true, 'Gebäude C', null);
+insert into Sitzungen (ID, Beginn, Ende, Einladung_am, oeffentlich, Ort, Protokoll) values (1, to_timestamp('06.12.2022 14:00:00', 'dd.mm.YYYY HH24:MI:SS'), to_timestamp('06.12.2022 16:00:00', 'dd.mm.YYYY HH24:MI:SS'), false, 'Gebäude H', null);
+insert into Sitzungen (ID, Beginn, Ende, Einladung_am, oeffentlich, Ort, Protokoll) values (2, to_timestamp('23.11.2022 20:00:00', 'dd.mm.YYYY HH24:MI:SS'), to_timestamp('23.11.2022 21:30:00', 'dd.mm.YYYY HH24:MI:SS'), true, 'Gebäude B', null);
+insert into Sitzungen (ID, Beginn, Ende, Einladung_am, oeffentlich, Ort, Protokoll) values (3, to_timestamp('04.12.2022 14:00:00', 'dd.mm.YYYY HH24:MI:SS'), to_timestamp('04.12.2022 16:00:00', 'dd.mm.YYYY HH24:MI:SS'), true, 'Gebäude C', null);
 
 insert into Mitglieder (ID_Gremien, ID_Personen, Funktion) values (1, 1, 'Vorsitzender');
 insert into Mitglieder (ID_Gremien, ID_Personen, Funktion) values (3, 2, 'Vorsitzender');

@@ -21,9 +21,9 @@ drop table Aufgabengebiete;
 create table Gremien (
     ID integer primary key,
     Name varchar (50),
-    offiziell BOOLEAN default TRUE,
-    inoffiziell BOOLEAN default FALSE,
-    Start date,
+    offiziell varchar (1) not null, /* da boolean nicht geht, varchar (1) not null */
+    inoffiziell varchar (1) not null,
+    Beginn date, /* "Start" ist eine reservierte Variable :| */
     Ende date
 );
 
@@ -32,14 +32,6 @@ create table Aufgabengebiete (
     Ag_ID integer,
     Aufgabengebiet varchar (100),
     constraint fk_Ag_Gremien foreign key (Ag_ID) references Gremien (ID)
-);
-
-create table Mitglieder (
-    ID_Gremien integer primary key,
-    ID_Personen integer primary key,
-    Funktion varchar (200),
-    constraint fk_Mitglieder_Gremien foreign key (ID_Gremien) references Gremien (ID),
-    constraint fk_Mitglieder_Personen foreign key (ID_Personen) references Personen (ID)
 );
 
 create table Personen (
@@ -66,10 +58,10 @@ create table Adresse (
 
 create table Sitzungen (
     ID integer primary key,
-    Beginn datetime,
-    Ende datetime,
+    Beginn timestamp,
+    Ende timestamp,
     Einladung_am date,
-    oeffentlich boolean default false,
+    oeffentlich varchar (1),
     Ort varchar (100),
     Protokoll varchar (4000)
 );
@@ -118,31 +110,35 @@ create table Dokument (
 );
 
 create table nimmt_teil (
-    ID_Personen integer primary key,
-    ID_Sitzungen integer primary key,
+    ID_Personen integer,
+    ID_Sitzungen integer,
     constraint fk_nt_Person foreign key (ID_Personen) references Personen (ID),
-    constraint fk_nt_Sitzung foreign key (ID_Sitzungen) references Sitzungen (ID)
+    constraint fk_nt_Sitzung foreign key (ID_Sitzungen) references Sitzungen (ID),
+    constarint pk_nt primary key (ID_Personen, ID_Sitzungen)
 );
 
 create table fuehrt_Protokoll_bei (
-    ID_Personen integer primary key,
-    ID_Sitzungen integer primary key,
+    ID_Personen integer,
+    ID_Sitzungen integer,
     constraint fk_fPb_Person foreign key (ID_Personen) references Personen (ID),
-    constraint fk_fPb_Person foreign key (ID_Sitzungen) references Sitzungen (ID)
+    constraint fk_fPb_Person foreign key (ID_Sitzungen) references Sitzungen (ID),
+    constraint pk_fPb_ID primary key (ID_Personen, ID_Sitzungen)
 );
 
 create table top (
-    ID_Sitzung integer primary key,
-    ID_Tagesordnung integer primary key,
+    ID_Sitzung integer,
+    ID_Tagesordnung integer,
     constraint fk_top_Sitzungen foreign key (ID_Sitzung) references Sitzungen (ID),
-    constraint fk_top_Tagesordnung foreign key (ID_Tagesordnung) references Tagesordnung (ID)
+    constraint fk_top_Tagesordnung foreign key (ID_Tagesordnung) references Tagesordnung (ID),
+    constraint pk_top_ID primary key (ID_Sitzung, ID_Tagesordnung)
 );
 
 create table hat (
-    ID_Gremien integer primary key,
-    ID_Sitzungen integer primary key,
+    ID_Gremien integer,
+    ID_Sitzungen integer,
     constraint fk_hat_Gremien foreign key (ID_Gremien) references Gremien (ID),
-    constraint fk_hat_Sitzungen foreign key (ID_Sitzungen) references Sitzungen (ID)
+    constraint fk_hat_Sitzungen foreign key (ID_Sitzungen) references Sitzungen (ID),
+    constraint pk_hat_ID primary key (ID_Gremien, ID_Sitzungen)
 );
 
 create table erstellt_von (
@@ -152,6 +148,15 @@ create table erstellt_von (
     constraint fk_ert_Dokument foreign key (ID_Dokument) references Dokument (ID) on delete set null
 );
 
-alter table Personen add (constraint chk_Geschlecht check (Geschlecht in ('m', 'w', 'd')));
+create table Mitglieder ( /* muss weiter unten stehen, da alle referenzierten Tabellen erst existieren müssen */
+    ID_Gremien integer,
+    ID_Personen integer,
+    Funktion varchar (200),
+    constraint fk_Mitglieder_Gremien foreign key (ID_Gremien) references Gremien (ID),
+    constraint fk_Mitglieder_Personen foreign key (ID_Personen) references Personen (ID),
+    constraint pk_Mitglieder_ID primary key (ID_Gremien, ID_Personen)
+);
+
+-- alter table Personen add (constraint chk_Geschlecht check (Geschlecht in ('m', 'w', 'd')));
 
 commit;
