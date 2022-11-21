@@ -1,6 +1,6 @@
-insert into Gremien (ID, Name, offiziell, inoffiziell, Beginn, Ende) values (1, 'Hochschulrat', true, false, to_date('01.01.1990', 'dd.mm.YYYY'), to_date('01.09.2050', 'dd.mm.YYYY'));
-insert into Gremien (ID, Name, offiziell, inoffiziell, Beginn, Ende) values (2, 'Fachschaft E', true, false, to_date('01.01.1990', 'dd.mm.YYYY'), to_date('01.09.2050', 'dd.mm.YYYY'));
-insert into Gremien (ID, Name, offiziell, inoffiziell, Beginn, Ende) values (3, 'Studienrat', true, false, to_date('01.01.1995', 'dd.mm.YYYY'), to_date('01.09.2040', 'dd.mm.YYYY'));
+insert into Gremien (ID, Name, offiziell, inoffiziell, Beginn, Ende) values (1, 'Hochschulrat', 1, 0, to_date('01.01.1990', 'dd.mm.YYYY'), to_date('01.09.2050', 'dd.mm.YYYY'));
+insert into Gremien (ID, Name, offiziell, inoffiziell, Beginn, Ende) values (2, 'Fachschaft E', 1, 0, to_date('01.01.1990', 'dd.mm.YYYY'), to_date('01.09.2050', 'dd.mm.YYYY'));
+insert into Gremien (ID, Name, offiziell, inoffiziell, Beginn, Ende) values (3, 'Studienrat', 1, 0, to_date('01.01.1995', 'dd.mm.YYYY'), to_date('01.09.2040', 'dd.mm.YYYY'));
 
 insert into Aufgabengebiete (ID, Ag_ID, Aufgabengebiet) values (1, 1, 'Studenten');
 insert into Aufgabengebiete (ID, Ag_ID, Aufgabengebiet) values (2, 1, 'Verwaltung');
@@ -20,12 +20,12 @@ insert into Adresse (ID, Strasse, Hausnummer, PLZ, Ort) values (2, 'Turmstr.', 1
 
 insert into Personen values (3, to_date('02.08.2001', 'dd.mm.YYYY'), 'w');
 insert into Namen (ID, Vorname, Nachname) values (3, 'Hanna', 'Moos');
-insert into Adresse (ID, Strasse, Hausnumer, PLZ, Ort) values (3, 'Obere Str.', 57, 12209, 'Berlin');
+insert into Adresse (ID, Strasse, Hausnummer, PLZ, Ort) values (3, 'Obere Str.', 57, 12209, 'Berlin');
 insert into Student (ID, Studiengang, Studienbeginn, MatrikelNr) values (3, 'AI', to_date('01.09.2020', 'dd.mm.YYYY'), 1000);
 
 insert into Personen values (4, to_date('15.03.1999', 'dd.mm.YYYY'), 'w');
 insert into Namen (ID, Vorname, Nachname) values (4, 'Marina', 'Moos');
-insert into Adresse (ID, Strasse, Hausnumer, PLZ, Ort) values (4, 'Forsterstr.', 50, 67000, 'Mannheim');
+insert into Adresse (ID, Strasse, Hausnummer, PLZ, Ort) values (4, 'Forsterstr.', 50, 67000, 'Mannheim');
 insert into Student (ID, Studiengang, Studienbeginn, MatrikelNr) values (4, 'AI', to_date('01.09.2020', 'dd.mm.YYYY'), 1001);
 
 insert into Dokument (ID, Mime_Typ, Erstelldatum, Inhalt) values (1, 'Text', to_date('19.03.2020', 'dd.mm.YYYY'), 'Enim commodo exercitation ut elit dolore magna sint dolore dolore do anim sit excepteur.');
@@ -43,9 +43,9 @@ insert into Tagesordnung (ID, Titel, Kurzbeschreibung, Protokolltext) values (2,
 insert into Tagesordnung (ID, Titel, Kurzbeschreibung, Protokolltext) values (3, 'Sonstiges', '', null);
 insert into Tagesordnung (ID, Titel, Kurzbeschreibung, Protokolltext) values (4, 'Ersti Hütte', 'Ankündigung', null);
 
-insert into Sitzungen (ID, Beginn, Ende, Einladung_am, oeffentlich, Ort, Protokoll) values (1, to_timestamp('06.12.2022 14:00:00', 'dd.mm.YYYY HH24:MI:SS'), to_timestamp('06.12.2022 16:00:00', 'dd.mm.YYYY HH24:MI:SS'), false, 'Gebäude H', null);
-insert into Sitzungen (ID, Beginn, Ende, Einladung_am, oeffentlich, Ort, Protokoll) values (2, to_timestamp('23.11.2022 20:00:00', 'dd.mm.YYYY HH24:MI:SS'), to_timestamp('23.11.2022 21:30:00', 'dd.mm.YYYY HH24:MI:SS'), true, 'Gebäude B', null);
-insert into Sitzungen (ID, Beginn, Ende, Einladung_am, oeffentlich, Ort, Protokoll) values (3, to_timestamp('04.12.2022 14:00:00', 'dd.mm.YYYY HH24:MI:SS'), to_timestamp('04.12.2022 16:00:00', 'dd.mm.YYYY HH24:MI:SS'), true, 'Gebäude C', null);
+insert into Sitzungen (ID, Beginn, Ende, Einladung_am, oeffentlich, Ort, Protokoll) values (1, to_timestamp('06.12.2022 14:00:00', 'dd.mm.YYYY HH24:MI:SS'), to_timestamp('06.12.2022 16:00:00', 'dd.mm.YYYY HH24:MI:SS'), to_date('01.11.2022', 'dd.mm.YYYY'), 0, 'Gebäude H', null);
+insert into Sitzungen (ID, Beginn, Ende, Einladung_am, oeffentlich, Ort, Protokoll) values (2, to_timestamp('23.11.2022 20:00:00', 'dd.mm.YYYY HH24:MI:SS'), to_timestamp('23.11.2022 21:30:00', 'dd.mm.YYYY HH24:MI:SS'), to_date('07.11.2022', 'dd.mm.YYYY'), 1, 'Gebäude B', null);
+insert into Sitzungen (ID, Beginn, Ende, Einladung_am, oeffentlich, Ort, Protokoll) values (3, to_timestamp('04.12.2022 14:00:00', 'dd.mm.YYYY HH24:MI:SS'), to_timestamp('04.12.2022 16:00:00', 'dd.mm.YYYY HH24:MI:SS'), to_date('23.10.2022', 'dd.mm.YYYY'), 1, 'Gebäude C', null);
 
 insert into Mitglieder (ID_Gremien, ID_Personen, Funktion) values (1, 1, 'Vorsitzender');
 insert into Mitglieder (ID_Gremien, ID_Personen, Funktion) values (3, 2, 'Vorsitzender');

@@ -1,4 +1,4 @@
-drop table Lehrbeauftrage;
+drop table Lehrbeauftragte;
 drop table Mitarbeiter;
 drop table Professoren;
 drop table Student;
@@ -73,7 +73,7 @@ create table Tagesordnung (
     Protokolltext varchar (4000)
 );
 
-create table Lehrbeauftrage (
+create table Lehrbeauftragte (
     ID integer primary key,
     constraint fk_Lehrbeauftragte_Pers foreign key (ID) references Personen (ID)
 );
