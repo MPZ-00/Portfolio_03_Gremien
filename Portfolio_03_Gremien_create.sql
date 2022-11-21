@@ -21,8 +21,8 @@ drop table Aufgabengebiete;
 create table Gremien (
     ID integer primary key,
     Name varchar (50),
-    offiziell BOOLEAN,
-    inoffiziell BOOLEAN,
+    offiziell BOOLEAN default TRUE,
+    inoffiziell BOOLEAN default FALSE,
     Start date,
     Ende date
 );
@@ -68,7 +68,7 @@ create table Sitzungen (
     Beginn datetime,
     Ende datetime,
     Einladung_am date,
-    oeffentlich boolean,
+    oeffentlich boolean default false,
     Ort varchar (100),
     Protokoll varchar (5000)
 );
@@ -117,27 +117,31 @@ create table Dokument (
 );
 
 create table nimmt_teil (
-    ID integer primary key,
-    constraint fk_nt_Person foreign key (ID) references Personen (ID),
-    constraint fk_nt_Sitzung foreign key (ID) references Sitzungen (ID)
+    ID_Personen integer primary key,
+    ID_Sitzungen integer primary key,
+    constraint fk_nt_Person foreign key (ID_Personen) references Personen (ID),
+    constraint fk_nt_Sitzung foreign key (ID_Sitzungen) references Sitzungen (ID)
 );
 
 create table fuehrt_Protokoll_bei (
-    ID integer primary key,
-    constraint fk_fPb_Person foreign key (ID) references Personen (ID),
-    constraint fk_fPb_Person foreign key (ID) references Sitzungen (ID)
+    ID_Personen integer primary key,
+    ID_Sitzungen integer primary key,
+    constraint fk_fPb_Person foreign key (ID_Personen) references Personen (ID),
+    constraint fk_fPb_Person foreign key (ID_Sitzungen) references Sitzungen (ID)
 );
 
 create table top (
-    ID integer primary key,
-    constraint fk_top_Sitzungen foreign key (ID) references Sitzungen (ID),
-    constraint fk_top_Tagesordnung foreign key (ID) references Tagesordnung (ID)
+    ID_Sitzung integer primary key,
+    ID_Tagesordnung integer primary key,
+    constraint fk_top_Sitzungen foreign key (ID_Sitzung) references Sitzungen (ID),
+    constraint fk_top_Tagesordnung foreign key (ID_Tagesordnung) references Tagesordnung (ID)
 );
 
 create table hat (
-    ID integer primary key,
-    constraint fk_hat_Gremien foreign key (ID) references Gremien (ID),
-    constraint fk_hat_Sitzungen foreign key (ID) references Sitzungen (ID)
+    ID_Gremien integer primary key,
+    ID_Sitzungen integer primary key,
+    constraint fk_hat_Gremien foreign key (ID_Gremien) references Gremien (ID),
+    constraint fk_hat_Sitzungen foreign key (ID_Sitzungen) references Sitzungen (ID)
 );
 
 create table erstellt_von (
