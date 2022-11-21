@@ -16,17 +16,22 @@ drop table fuehrt_Protokoll_bei;
 drop table top;
 drop table hat;
 drop table erstellt_von;
+drop table Aufgabengebiete;
 
 create table Gremien (
     ID integer primary key,
     Name varchar (50),
-    Aufgabengebiete varchar (200),
     offiziell BOOLEAN,
     inoffiziell BOOLEAN,
     Start date,
-    Ende date,
-    constraint fk_Gremien_hat foreign key (ID) references hat (ID),
-    constraint fk_Gremien_Mitglieder foreign key (ID) references Mitglieder (ID)
+    Ende date
+);
+
+create table Aufgabengebiete (
+    ID integer primary key,
+    Ag_ID integer,
+    Aufgabengebiet varchar (100),
+    constraint fk_Ag_Gremien foreign key (Ag_ID) references Gremien (ID)
 );
 
 create table Mitglieder (
@@ -39,10 +44,7 @@ create table Mitglieder (
 create table Personen (
     ID integer primary key,
     Geburtsdatum date,
-    Geschlecht char (1),
-    constraint fk_Personen_Mitglieder foreign key (ID) references Mitglieder (ID),
-    constraint fk_Personen_Adressen foreign key (ID) references Adresse (ID),
-    constraint fk_Personen_Namen foreign key (ID) references Namen (ID)
+    Geschlecht char (1)
 );
 
 create table Namen (
@@ -68,8 +70,7 @@ create table Sitzungen (
     Einladung_am date,
     oeffentlich boolean,
     Ort varchar (100),
-    Protokoll varchar (5000),
-    constraint fk_Sitzungen_hat foreign key (ID) references Gremien (ID)
+    Protokoll varchar (5000)
 );
 
 create table Tagesordnung (
@@ -143,6 +144,8 @@ create table hat (
 create table erstellt_von (
     ID integer primary key,
     ID_Dokument integer,
-    constraint fk_ert_Personen foreign key (ID) references Personen (ID),
+    constraint fk_ert_Personen foreign key (ID) references Personen (ID) on delete set null,
     constraint fk_ert_Dokument foreign key (ID_Dokument) references Dokument (ID)
 );
+
+alter table Personen add (constraint chk_Geschlecht check (Geschlecht in ('m', 'w', 'd')));
