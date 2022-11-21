@@ -1,12 +1,11 @@
-drop table Gremien;
 drop table Lehrbeauftrage;
 drop table Mitarbeiter;
 drop table Professoren;
 drop table Student;
 drop table Sonstige_Personen;
-drop table Personen;
 drop table Namen;
 drop table Adresse;
+drop table Personen;
 drop table Sitzungen;
 drop table Tagesordnung;
 drop table Mitglieder;
@@ -17,6 +16,7 @@ drop table top;
 drop table hat;
 drop table erstellt_von;
 drop table Aufgabengebiete;
+drop table Gremien;
 
 create table Gremien (
     ID integer primary key,
@@ -31,7 +31,7 @@ create table Aufgabengebiete (
     ID integer primary key,
     Ag_ID integer,
     Aufgabengebiet varchar (100),
-    constraint fk_Ag_Gremien foreign key (Ag_ID) references Gremien (ID)
+    constraint fk_Ag_Gremien foreign key (Ag_ID) references Gremien (ID) /* N Aufgabengebiete -> 1 Gremien */
 );
 
 create table Personen (
@@ -58,10 +58,10 @@ create table Adresse (
 
 create table Sitzungen (
     ID integer primary key,
-    Beginn timestamp,
-    Ende timestamp,
+    Beginn timestamp, /* geändert von date zu timestamp, da dieser Typ Datum und Zeit unterstüzt */
+    Ende timestamp, /* geändert von date zu timestamp, da dieser Typ Datum und Zeit unterstüzt */
     Einladung_am date,
-    oeffentlich varchar (1),
+    oeffentlich varchar (1), /* da boolean nicht geht, varchar (1) not null */
     Ort varchar (100),
     Protokoll varchar (4000)
 );
@@ -106,6 +106,7 @@ create table Dokument (
     Mime_Typ varchar (50),
     Erstelldatum date,
     Inhalt varchar (4000)
+    /* Dokument Author wurde entfernt, da der Author in 'erstellt_von' benannt wird */
 );
 
 create table nimmt_teil (
@@ -136,7 +137,7 @@ create table hat (
     ID_Gremien integer,
     ID_Sitzungen integer,
     constraint fk_hat_Gremien foreign key (ID_Gremien) references Gremien (ID),
-    constraint fk_hat_Sitzungen foreign key (ID_Sitzungen) references Sitzungen (ID),
+    constraint fk_hat_Sitzungen foreign key (ID_Sitzungen) references Sitzungen (ID) on delete set null,
     constraint pk_hat_ID primary key (ID_Gremien, ID_Sitzungen)
 );
 
@@ -157,5 +158,7 @@ create table Mitglieder ( /* muss weiter unten stehen, da alle referenzierten Ta
 );
 
 -- alter table Personen add (constraint chk_Geschlecht check (Geschlecht in ('m', 'w', 'd')));
+-- alter table Gremien add (constraint chk_offiziell check (offiziell in ('1', '0')));
+-- alter table Gremien add (constraint chk_inoffiziell check (inoffiziell in ('1', '0')));
 
 commit;
