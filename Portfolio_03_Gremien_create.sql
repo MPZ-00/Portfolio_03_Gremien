@@ -111,7 +111,6 @@ create table Sonstige_Personen (
 
 create table Dokument (
     ID integer primary key,
-    Author varchar (100),
     Mime_Typ varchar (50),
     Erstelldatum date,
     Inhalt varchar (5000)
@@ -142,10 +141,12 @@ create table hat (
 );
 
 create table erstellt_von (
-    ID integer primary key,
+    ID_Author integer primary key,
     ID_Dokument integer,
-    constraint fk_ert_Personen foreign key (ID) references Personen (ID) on delete set null,
-    constraint fk_ert_Dokument foreign key (ID_Dokument) references Dokument (ID)
+    constraint fk_ert_Personen foreign key (ID_Author) references Personen (ID) on delete set null,
+    constraint fk_ert_Dokument foreign key (ID_Dokument) references Dokument (ID) on delete set null
 );
 
 alter table Personen add (constraint chk_Geschlecht check (Geschlecht in ('m', 'w', 'd')));
+
+commit;
