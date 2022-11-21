@@ -1,6 +1,6 @@
-insert into Gremien (ID, Name, offiziell, inoffiziell, Beginn, Ende) values (1, 'Hochschulrat', true, false, to_date('', ''), to_date('', ''));
-insert into Gremien (ID, Name, offiziell, inoffiziell, Beginn, Ende) values (2, 'Fachschaft E', true, false, to_date('', ''), to_date('', ''));
-insert into Gremien (ID, Name, offiziell, inoffiziell, Beginn, Ende) values (3, 'Studienrat', true, false, to_date('', ''), to_date('', ''));
+insert into Gremien (ID, Name, offiziell, inoffiziell, Beginn, Ende) values (1, 'Hochschulrat', true, false, to_date('01.01.1990', 'dd.mm.YYYY'), to_date('01.09.2050', 'dd.mm.YYYY'));
+insert into Gremien (ID, Name, offiziell, inoffiziell, Beginn, Ende) values (2, 'Fachschaft E', true, false, to_date('01.01.1990', 'dd.mm.YYYY'), to_date('01.09.2050', 'dd.mm.YYYY'));
+insert into Gremien (ID, Name, offiziell, inoffiziell, Beginn, Ende) values (3, 'Studienrat', true, false, to_date('01.01.1995', 'dd.mm.YYYY'), to_date('01.09.2040', 'dd.mm.YYYY'));
 
 insert into Aufgabengebiete (ID, Ag_ID, Aufgabengebiet) values (1, 1, 'Studenten');
 insert into Aufgabengebiete (ID, Ag_ID, Aufgabengebiet) values (2, 1, 'Verwaltung');

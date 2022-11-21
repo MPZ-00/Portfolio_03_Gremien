@@ -70,8 +70,7 @@ create table Tagesordnung (
     ID integer primary key,
     Titel varchar (100),
     Kurzbeschreibung varchar (500),
-    Protokolltext varchar (4000),
-    constraint fk_Tagesordnung_top foreign key (ID) references top (ID)
+    Protokolltext varchar (4000)
 );
 
 create table Lehrbeauftrage (
