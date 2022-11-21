@@ -35,10 +35,11 @@ create table Aufgabengebiete (
 );
 
 create table Mitglieder (
-    ID integer primary key,
+    ID_Gremien integer primary key,
+    ID_Personen integer primary key,
     Funktion varchar (200),
-    constraint fk_Mitglieder_Gremien foreign key (ID) references Gremien (ID),
-    constraint fk_Mitglieder_Personen foreign key (ID) references Personen (ID)
+    constraint fk_Mitglieder_Gremien foreign key (ID_Gremien) references Gremien (ID),
+    constraint fk_Mitglieder_Personen foreign key (ID_Personen) references Personen (ID)
 );
 
 create table Personen (
