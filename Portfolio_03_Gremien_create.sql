@@ -121,7 +121,7 @@ create table fuehrt_Protokoll_bei (
     ID_Personen integer,
     ID_Sitzungen integer,
     constraint fk_fPb_Person foreign key (ID_Personen) references Personen (ID),
-    constraint fk_fPb_Person foreign key (ID_Sitzungen) references Sitzungen (ID),
+    constraint fk_fPb_Sitzung foreign key (ID_Sitzungen) references Sitzungen (ID),
     constraint pk_fPb_ID primary key (ID_Personen, ID_Sitzungen)
 );
 
