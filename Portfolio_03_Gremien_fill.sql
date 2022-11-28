@@ -75,4 +75,23 @@ insert into fuehrt_Protokoll_bei (ID_Personen, ID_Sitzungen) values (1, 1);
 insert into fuehrt_Protokoll_bei (ID_Personen, ID_Sitzungen) values (2, 2);
 insert into fuehrt_Protokoll_bei (ID_Personen, ID_Sitzungen) values (3, 3);
 
+insert into Antrag (ID, Titel, Text, Ergebnis, Angenommen) values (1, 'Wahlen', 'Aliqua quis est commodo amet amet culpa in cillum eu.', 'ja', '1');
+insert into Antrag (ID, Titel, Text, Ergebnis, Angenommen) values (2, 'Urlaub', null, 'nein', '0');
+insert into Antrag (ID, Titel, Text, Ergebnis, Angenommen) values (3, 'Rubber Ducky', 'Jut als Motivation', 'enthaltung', '1');
+
+insert into stellt (1, 2);
+insert into stellt (2, 1);
+insert into stellt (4, 3);
+
+insert into gehoert_zu (1, 1);
+insert into gehoert_zu (2, 3);
+insert into gehoert_zu (3, 3);
+
+insert into fuer (1, 1);
+insert into fuer (2, 4);
+insert into fuer (2, 2);
+insert into fuer (3, 3);
+insert into fuer (4, 4);
+insert into fuer (4, 1);
+
 commit;

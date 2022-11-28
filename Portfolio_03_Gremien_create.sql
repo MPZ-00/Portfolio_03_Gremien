@@ -109,6 +109,14 @@ create table Dokument (
     /* Dokument Author wurde entfernt, da der Author in 'erstellt_von' benannt wird */
 );
 
+create table Antrag (
+    ID integer primary key,
+    Titel varchar (100),
+    Text varchar (300),
+    Ergebnis varchar (50), /* 'ja', 'nein', 'enthaltung' */
+    Angenommen varchar (1) not null /* da boolean nicht geht, varchar (1) not null */
+);
+
 create table nimmt_teil (
     ID_Personen integer,
     ID_Sitzungen integer,
@@ -155,6 +163,30 @@ create table Mitglieder ( /* muss weiter unten stehen, da alle referenzierten Ta
     constraint fk_Mitglieder_Gremien foreign key (ID_Gremien) references Gremien (ID),
     constraint fk_Mitglieder_Personen foreign key (ID_Personen) references Personen (ID),
     constraint pk_Mitglieder_ID primary key (ID_Gremien, ID_Personen)
+);
+
+create table stellt (
+    ID_Person integer,
+    ID_Antrag integer,
+    constraint fk_stellt_Person foreign key (ID_Person) references Personen (ID) on delete set null,
+    constraint fk_stellt_Antrag foreign key (ID_Antrag) references Antrag (ID) on delete set null,
+    constraint pk_stellt_ID primary key (ID_Person, ID_Antrag)
+);
+
+create table gehoert_zu (
+    ID_Antrag integer,
+    ID_TOP integer,
+    constraint fk_gehoert_zu_Antrag foreign key (ID_Antrag) references Antrag (ID) on delete set null,
+    constraint fk_gehoert_zu_TOP foreign key (ID_TOP) references Tagesordnung (ID) on delete set null,
+    constraint pk_gehoert_zu_ID primary key (ID_Antrag, ID_TOP)
+);
+
+create table fuer (
+    ID_Dokumkent integer,
+    ID_TOP integer,
+    constraint fk_fuer_Dokument foreign key (ID_Dokument) references Dokument (ID),
+    constraint fk_fuer_TOP foreign key (ID_TOP) references Tagesordnung (ID),
+    constraint pk_fuer primary key (ID_Dokument, ID_TOP)
 );
 
 -- alter table Personen add (constraint chk_Geschlecht check (Geschlecht in ('m', 'w', 'd')));
