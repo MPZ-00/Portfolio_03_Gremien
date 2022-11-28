@@ -182,7 +182,7 @@ create table gehoert_zu (
 );
 
 create table fuer (
-    ID_Dokumkent integer,
+    ID_Dokument integer,
     ID_TOP integer,
     constraint fk_fuer_Dokument foreign key (ID_Dokument) references Dokument (ID),
     constraint fk_fuer_TOP foreign key (ID_TOP) references Tagesordnung (ID),
