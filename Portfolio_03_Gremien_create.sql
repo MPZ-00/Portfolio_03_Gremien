@@ -16,6 +16,7 @@ drop table top;
 drop table hat;
 drop table erstellt_von;
 drop table Aufgabengebiete;
+drop table Aufgaben_Gremien;
 drop table Gremien;
 
 create table Gremien (
@@ -29,9 +30,7 @@ create table Gremien (
 
 create table Aufgabengebiete (
     ID integer primary key,
-    Ag_ID integer,
-    Aufgabengebiet varchar (100),
-    constraint fk_Ag_Gremien foreign key (Ag_ID) references Gremien (ID) /* N Aufgabengebiete -> 1 Gremien */
+    Aufgabengebiet varchar(500)
 );
 
 create table Personen (
@@ -122,7 +121,7 @@ create table nimmt_teil (
     ID_Sitzungen integer,
     constraint fk_nt_Person foreign key (ID_Personen) references Personen (ID),
     constraint fk_nt_Sitzung foreign key (ID_Sitzungen) references Sitzungen (ID),
-    constarint pk_nt primary key (ID_Personen, ID_Sitzungen)
+    constraint pk_nt primary key (ID_Personen, ID_Sitzungen)
 );
 
 create table fuehrt_Protokoll_bei (
@@ -192,5 +191,13 @@ create table fuer (
 -- alter table Personen add (constraint chk_Geschlecht check (Geschlecht in ('m', 'w', 'd')));
 -- alter table Gremien add (constraint chk_offiziell check (offiziell in ('1', '0')));
 -- alter table Gremien add (constraint chk_inoffiziell check (inoffiziell in ('1', '0')));
+
+create table Aufgaben_Gremien (
+    ID_Aufgabe integer,
+    ID_Gremium integer,
+    constraint fk_AG_Aufgabe foreign key (ID_Aufgabe) references Aufgabengebiete (ID),
+    constraint fk_AG_Gremien foreign key (ID_Gremium) references Gremien (ID),
+    constraint pk_AG_ID primary key (ID_Aufgabe, ID_Gremium)
+);
 
 commit;

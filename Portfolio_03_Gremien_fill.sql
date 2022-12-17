@@ -79,19 +79,19 @@ insert into Antrag (ID, Titel, Text, Ergebnis, Angenommen) values (1, 'Wahlen', 
 insert into Antrag (ID, Titel, Text, Ergebnis, Angenommen) values (2, 'Urlaub', null, 'nein', '0');
 insert into Antrag (ID, Titel, Text, Ergebnis, Angenommen) values (3, 'Rubber Ducky', 'Jut als Motivation', 'enthaltung', '1');
 
-insert into stellt (1, 2);
-insert into stellt (2, 1);
-insert into stellt (4, 3);
+insert into stellt (ID_Person, ID_Antrag) values (1, 2);
+insert into stellt (ID_Person, ID_Antrag) values (2, 1);
+insert into stellt (ID_Person, ID_Antrag) values (4, 3);
 
-insert into gehoert_zu (1, 1);
-insert into gehoert_zu (2, 3);
-insert into gehoert_zu (3, 3);
+insert into gehoert_zu (ID_Antrag, ID_TOP) values (1, 1);
+insert into gehoert_zu (ID_Antrag, ID_TOP) values (2, 3);
+insert into gehoert_zu (ID_Antrag, ID_TOP) values (3, 3);
 
-insert into fuer (1, 1);
-insert into fuer (2, 4);
-insert into fuer (2, 2);
-insert into fuer (3, 3);
-insert into fuer (4, 4);
-insert into fuer (4, 1);
+insert into fuer (ID_Dokument, ID_TOP) values (1, 1);
+insert into fuer (ID_Dokument, ID_TOP) values (2, 4);
+insert into fuer (ID_Dokument, ID_TOP) values (2, 2);
+insert into fuer (ID_Dokument, ID_TOP) values (3, 3);
+insert into fuer (ID_Dokument, ID_TOP) values (4, 4);
+insert into fuer (ID_Dokument, ID_TOP) values (4, 1);
 
 commit;
